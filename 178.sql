@@ -32,3 +32,15 @@ ORDER BY score DESC;
 SELECT Score, DENSE_RANK() OVER(ORDER BY Score DESC) AS Rank
 FROM Scores
 ORDER BY Rank;
+
+SELECT S.Score, COUNT(S2.Score) AS Rank FROM Scores S,
+(SELECT DISTINCT Score FROM Scores) S2
+WHERE S.Score<=S2.Score
+GROUP BY S.Id
+ORDER BY S.Score DESC;
+
+/*MySQL
+Select Score,
+       Dense_rank() Over (Order By Score Desc) `Rank`
+From Scores
+*/
